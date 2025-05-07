@@ -55,6 +55,7 @@ const registerUser = async (req, res) => {
 };
 
 // Login User
+// http://localhost:800/api/auth/login
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -62,7 +63,7 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (user && (await user.matchPassword(password))) {
-            const token = generateToken(user._id);
+            const token = generateToken(user._id, email, user.labId);
 
             res.cookie('jwt', token, {
                 httpOnly: true,
@@ -78,7 +79,8 @@ const loginUser = async (req, res) => {
                 email: user.email,
                 role: user.role,
                 gender: user.gender,
-                phone_number: user.phone_number
+                phone_number: user.phone_number,
+                token
             });
         } else {
             res.status(401).json({ message: 'Invalid email or password' });

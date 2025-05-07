@@ -17,11 +17,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
     origin: '*', // Allow requests from any origin
-    // credentials: false // Set to false when using '*' for origin
+    credentials: true // Set to false when using '*' for origin
 }));
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/patient', require('./routes/patientRoutes')); // Add this line
 
 const PORT = process.env.PORT || 5000;
 
