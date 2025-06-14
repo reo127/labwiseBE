@@ -22,7 +22,8 @@ app.use(cors({
 
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/patient', require('./routes/patientRoutes')); // Add this line
+app.use('/api/patient', require('./routes/patientRoutes'));
+app.use('/api/lab', require('./routes/labRoutes'));
 
 const PORT = process.env.PORT || 5000;
 
